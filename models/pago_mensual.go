@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
-	"time"
 
 	"github.com/astaxie/beego/orm"
 )
@@ -18,8 +17,8 @@ type PagoMensual struct {
 	Persona             string    `orm:"column(persona)"`
 	EstadoPagoMensualId int       `orm:"column(estado_pago_mensual_id)"`
 	Responsable         string    `orm:"column(responsable)"`
-	FechaCreacion       time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion   time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion       string `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion   string `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
 	CargoResponsable    string    `orm:"column(cargo_responsable)"`
 	Ano                 float64   `orm:"column(ano)"`
 }

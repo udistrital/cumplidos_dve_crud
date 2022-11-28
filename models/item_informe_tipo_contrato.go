@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
-	"time"
 
 	"github.com/astaxie/beego/orm"
 )
@@ -14,8 +13,8 @@ type ItemInformeTipoContrato struct {
 	Id                int       `orm:"column(id);pk;auto"`
 	ItemInformeId     int       `orm:"column(item_informe_id)"`
 	TipoContratoId    int       `orm:"column(tipo_contrato_id)"`
-	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
+	FechaCreacion     string `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion string `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
 }
 
 func (t *ItemInformeTipoContrato) TableName() string {
