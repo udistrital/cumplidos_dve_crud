@@ -1,6 +1,5 @@
-# cumplidos_dve_crud
-:heavy_check_mark: Check: Repositorio api CRUD para el sistema de cumplidos DVE.
-
+# cumplidos-dve-crud
+✔️ Check: CRUD para el nuevo sistema de Cumplidos Dve.
 
 ## Especificaciones Técnicas
 
@@ -83,6 +82,8 @@ Pruebas unitarias
 | -- | -- | -- |
 | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/cumplidos_dve_crud/status.svg?ref=refs/heads/develop)](https://hubci.portaloas.udistrital.edu.co/udistrital/cumplidos_dve_crud) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/cumplidos_dve_crud/status.svg?ref=refs/heads/release/0.0.1)](https://hubci.portaloas.udistrital.edu.co/udistrital/cumplidos_dve_crud) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/cumplidos_dve_crud/status.svg?ref=refs/heads/master)](https://hubci.portaloas.udistrital.edu.co/udistrital/cumplidos_dve_crud) |
 
+## Esquema de base de datos
+* [Esquema de Base de datos](https://drive.google.com/file/d/1TCfrbYWakYtMgJm2iG-gzMKJcqPUVEF2/view?usp=sharing)
 
 ## Licencia
 
