@@ -1,6 +1,6 @@
 module github.com/udistrital/cumplidos_dve_crud
 
-go 1.19
+go 1.18
 
 require (
 	github.com/astaxie/beego v1.12.3
