@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/udistrital/cumplidos_dve_crud/models"
+	"github.com/udistrital/utils_oas/time_bogota"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
@@ -36,6 +37,8 @@ func (c *ItemInformeTipoContratoController) URLMapping() {
 func (c *ItemInformeTipoContratoController) Post() {
 	var v models.ItemInformeTipoContrato
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+		v.FechaCreacion = time_bogota.TiempoBogotaFormato()
+		v.FechaModificacion = time_bogota.TiempoBogotaFormato()
 		if _, err := models.AddItemInformeTipoContrato(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
 			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "201", "Message": "Registration successful", "Data": v}
@@ -134,7 +137,7 @@ func (c *ItemInformeTipoContratoController) GetAll() {
 		c.Abort("404")
 	} else {
 		if l == nil {
-			l = append(l, map[string]interface{}{})
+			l = []interface{}{}
 		}
 		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Request successful", "Data": l}
 	}
@@ -154,6 +157,8 @@ func (c *ItemInformeTipoContratoController) Put() {
 	id, _ := strconv.Atoi(idStr)
 	v := models.ItemInformeTipoContrato{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
+		v.FechaCreacion = time_bogota.TiempoBogotaFormato()
+		v.FechaModificacion = time_bogota.TiempoBogotaFormato()
 		if err := models.UpdateItemInformeTipoContratoById(&v); err == nil {
 			c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Update successful", "Data": v}
 		} else {
