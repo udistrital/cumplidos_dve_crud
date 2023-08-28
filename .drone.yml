@@ -52,7 +52,7 @@ steps:
     - push
 
 - name: go_build
-  image: golang:1.15
+  image: golang:1.19
   commands:
   # - go mod init
   - go get -t
@@ -68,7 +68,7 @@ steps:
     - push
 
 - name: go_run_test
-  image: golang:1.18
+  image: golang:1.19
   commands:
   - go get -t
   - go get github.com/smartystreets/goconvey/convey
@@ -98,7 +98,7 @@ steps:
       from_secret: SONAR_TOKEN
 
 - name: beego_migrate
-  image: golang:1.18
+  image: golang:1.19
   failure: ignore
   environment:
     PG_MIGRATION_USER:
@@ -120,7 +120,7 @@ steps:
     - push
 
 - name: beego_rollback
-  image: golang:1.18
+  image: golang:1.19
   failure: ignore
   environment:
     PG_MIGRATION_USER:
@@ -180,7 +180,7 @@ steps:
     - push
 
 - name: update_aws_ecs
-  image: golang:1.15
+  image: golang:1.19
   environment:
     AWS_ACCESS_KEY_ID:
       from_secret: AWS_ACCESS_KEY_ID

@@ -6,11 +6,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/udistrital/cumplidos_dve_crud/models"
-	"github.com/udistrital/utils_oas/time_bogota"
-
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
+	"github.com/udistrital/cumplidos_dve_crud/models"
+	"github.com/udistrital/utils_oas/time_bogota"
 )
 
 // ItemInformeTipoContratoController operations for ItemInformeTipoContrato
@@ -36,6 +35,7 @@ func (c *ItemInformeTipoContratoController) URLMapping() {
 // @router / [post]
 func (c *ItemInformeTipoContratoController) Post() {
 	var v models.ItemInformeTipoContrato
+
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		v.FechaCreacion = time_bogota.TiempoBogotaFormato()
 		v.FechaModificacion = time_bogota.TiempoBogotaFormato()
@@ -52,6 +52,7 @@ func (c *ItemInformeTipoContratoController) Post() {
 		c.Data["mesaage"] = "Error service POST: The request contains an incorrect data type or an invalid parameter"
 		c.Abort("400")
 	}
+
 	c.ServeJSON()
 }
 
@@ -66,6 +67,7 @@ func (c *ItemInformeTipoContratoController) GetOne() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetItemInformeTipoContratoById(id)
+
 	if err != nil {
 		logs.Error(err)
 		c.Data["mesaage"] = "Error service GetOne: The request contains an incorrect parameter or no record exists"
@@ -73,6 +75,7 @@ func (c *ItemInformeTipoContratoController) GetOne() {
 	} else {
 		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Request successful", "Data": v}
 	}
+
 	c.ServeJSON()
 }
 
@@ -141,6 +144,7 @@ func (c *ItemInformeTipoContratoController) GetAll() {
 		}
 		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Request successful", "Data": l}
 	}
+
 	c.ServeJSON()
 }
 
@@ -156,6 +160,7 @@ func (c *ItemInformeTipoContratoController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	v := models.ItemInformeTipoContrato{Id: id}
+
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		v.FechaCreacion = time_bogota.TiempoBogotaFormato()
 		v.FechaModificacion = time_bogota.TiempoBogotaFormato()
@@ -171,6 +176,7 @@ func (c *ItemInformeTipoContratoController) Put() {
 		c.Data["mesaage"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
 		c.Abort("400")
 	}
+
 	c.ServeJSON()
 }
 
@@ -182,6 +188,7 @@ func (c *ItemInformeTipoContratoController) Put() {
 // @Failure 404 not found resource
 // @router /:id [delete]
 func (c *ItemInformeTipoContratoController) Delete() {
+
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	if err := models.DeleteItemInformeTipoContrato(id); err == nil {
@@ -192,5 +199,6 @@ func (c *ItemInformeTipoContratoController) Delete() {
 		c.Data["mesaage"] = "Error service Delete: Request contains incorrect parameter"
 		c.Abort("404")
 	}
+
 	c.ServeJSON()
 }

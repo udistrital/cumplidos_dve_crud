@@ -6,11 +6,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/udistrital/cumplidos_dve_crud/models"
-	"github.com/udistrital/utils_oas/time_bogota"
-
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
+	"github.com/udistrital/cumplidos_dve_crud/models"
+	"github.com/udistrital/utils_oas/time_bogota"
 )
 
 // PagoMensualController operations for PagoMensual
@@ -36,6 +35,7 @@ func (c *PagoMensualController) URLMapping() {
 // @router / [post]
 func (c *PagoMensualController) Post() {
 	var v models.PagoMensual
+
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		v.FechaCreacion = time_bogota.TiempoBogotaFormato()
 		v.FechaModificacion = time_bogota.TiempoBogotaFormato()
@@ -52,6 +52,7 @@ func (c *PagoMensualController) Post() {
 		c.Data["mesaage"] = "Error service POST: The request contains an incorrect data type or an invalid parameter"
 		c.Abort("400")
 	}
+
 	c.ServeJSON()
 }
 
@@ -66,6 +67,7 @@ func (c *PagoMensualController) GetOne() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetPagoMensualById(id)
+
 	if err != nil {
 		logs.Error(err)
 		c.Data["mesaage"] = "Error service GetOne: The request contains an incorrect parameter or no record exists"
@@ -73,6 +75,7 @@ func (c *PagoMensualController) GetOne() {
 	} else {
 		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Request successful", "Data": v}
 	}
+
 	c.ServeJSON()
 }
 
@@ -141,6 +144,7 @@ func (c *PagoMensualController) GetAll() {
 		}
 		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Request successful", "Data": l}
 	}
+
 	c.ServeJSON()
 }
 
@@ -156,6 +160,7 @@ func (c *PagoMensualController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	v := models.PagoMensual{Id: id}
+
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		v.FechaCreacion = time_bogota.TiempoBogotaFormato()
 		v.FechaModificacion = time_bogota.TiempoBogotaFormato()
@@ -171,6 +176,7 @@ func (c *PagoMensualController) Put() {
 		c.Data["mesaage"] = "Error service Put: The request contains an incorrect data type or an invalid parameter"
 		c.Abort("400")
 	}
+
 	c.ServeJSON()
 }
 
@@ -184,6 +190,7 @@ func (c *PagoMensualController) Put() {
 func (c *PagoMensualController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
+
 	if err := models.DeletePagoMensual(id); err == nil {
 		d := map[string]interface{}{"Id": id}
 		c.Data["json"] = map[string]interface{}{"Success": true, "Status": "200", "Message": "Delete successful", "Data": d}
@@ -192,5 +199,6 @@ func (c *PagoMensualController) Delete() {
 		c.Data["mesaage"] = "Error service Delete: Request contains incorrect parameter"
 		c.Abort("404")
 	}
+
 	c.ServeJSON()
 }
