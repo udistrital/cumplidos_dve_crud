@@ -7,9 +7,10 @@ import (
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/plugins/cors"
 	_ "github.com/lib/pq"
-	"github.com/udistrital/utils_oas/auditoria"
 	apistatus "github.com/udistrital/utils_oas/apiStatusLib"
+	"github.com/udistrital/utils_oas/auditoria"
 	"github.com/udistrital/utils_oas/customerrorv2"
+	"github.com/udistrital/utils_oas/xray"
 )
 
 func main() {
@@ -32,18 +33,18 @@ func main() {
 		AllowOrigins: AllowedOrigins,
 		AllowMethods: []string{"PUT", "PATCH", "GET", "POST", "OPTIONS", "DELETE"},
 		AllowHeaders: []string{"Origin", "x-requested-with",
-		  "content-type",
-		  "accept",
-		  "origin",
-		  "authorization",
-		  "x-csrftoken"},
+			"content-type",
+			"accept",
+			"origin",
+			"authorization",
+			"x-csrftoken"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
-	  }))
-	
+	}))
+
+	xray.InitXRay("Cumplidos_DVE_CRUD")
 	beego.ErrorController(&customerrorv2.CustomErrorController{})
 	apistatus.Init()
 	auditoria.InitMiddleware()
 	beego.Run()
 }
-
