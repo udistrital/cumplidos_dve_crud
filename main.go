@@ -1,12 +1,11 @@
 package main
 
 import (
-	_ "github.com/udistrital/cumplidos_dve_crud/routers"
-
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/plugins/cors"
 	_ "github.com/lib/pq"
+	_ "github.com/udistrital/cumplidos_dve_crud/routers"
 	apistatus "github.com/udistrital/utils_oas/apiStatusLib"
 	"github.com/udistrital/utils_oas/auditoria"
 	"github.com/udistrital/utils_oas/customerrorv2"
@@ -14,7 +13,9 @@ import (
 )
 
 func main() {
+
 	orm.Debug = true
+
 	orm.RegisterDataBase("default", "postgres", "postgres://"+
 		beego.AppConfig.String("PGuser")+":"+
 		beego.AppConfig.String("PGpass")+"@"+
@@ -42,7 +43,7 @@ func main() {
 		AllowCredentials: true,
 	}))
 
-	xray.InitXRay("Cumplidos_DVE_CRUD")
+	xray.InitXRay()
 	beego.ErrorController(&customerrorv2.CustomErrorController{})
 	apistatus.Init()
 	auditoria.InitMiddleware()
